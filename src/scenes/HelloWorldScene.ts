@@ -10,6 +10,8 @@ export default class HelloWorldScene extends Phaser.Scene
     private score:number = 0
     private scoreText?: Phaser.GameObjects.Text
 
+    private bombs?: Phaser.Physics.Arcade.Group
+
 	constructor()
 	{
 		super('hello-world')
@@ -88,6 +90,15 @@ export default class HelloWorldScene extends Phaser.Scene
             fill: '#000'        
         })
 
+        this.bombs = this.physics.add.group()
+        this.physics.add.collider(this.bombs, this.platforms, this.handleBombHit, undefined, this)
+
+    }
+
+    private handleBombHit(player: Phaser.GameObjects.GameObject, b: Phaser.GameObjects.GameObject) {
+        this.physics.pause()
+        this.player?.setTint(0xff0000)
+        this.player?.anims.play('turn')
     }
 
     private handleCollectStar(player: Phaser.GameObjects.GameObject, s: Phaser.GameObjects.GameObject) {
