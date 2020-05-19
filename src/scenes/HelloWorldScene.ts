@@ -78,8 +78,13 @@ export default class HelloWorldScene extends Phaser.Scene
         })
 
         this.physics.add.collider(this.stars, this.platforms)
-        this.physics.add.overlap(this.player, this.stars)
+        this.physics.add.overlap(this.player, this.stars, this.handleCollectStar, undefined, this)
 
+    }
+
+    private handleCollectStar(player: Phaser.GameObjects.GameObject, s: Phaser.GameObjects.GameObject) {
+        const star = s as Phaser.Physics.Arcade.Image
+        star.disableBody(true, true)
     }
 
     update() {
