@@ -59,6 +59,8 @@ export default class HelloWorldScene extends Phaser.Scene
             frameRate: 10,
             repeat: -1
         })
+
+        this.physics.add.collider(this.platforms, this.player)
     }
 
     update() {
