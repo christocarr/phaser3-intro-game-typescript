@@ -7,7 +7,7 @@ export default class HelloWorldScene extends Phaser.Scene
     private cursors?: Phaser.Types.Input.Keyboard.CursorKeys
     private stars?: Phaser.Physics.Arcade.Group
 
-    private score?: 0
+    private score:number = 0
     private scoreText?: Phaser.GameObjects.Text
 
 	constructor()
@@ -93,6 +93,9 @@ export default class HelloWorldScene extends Phaser.Scene
     private handleCollectStar(player: Phaser.GameObjects.GameObject, s: Phaser.GameObjects.GameObject) {
         const star = s as Phaser.Physics.Arcade.Image
         star.disableBody(true, true)
+
+        this.score += 10
+        this.scoreText?.setText(`Score: ${this.score}`)
     }
 
     update() {
